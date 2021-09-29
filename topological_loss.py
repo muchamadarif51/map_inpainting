@@ -6,7 +6,7 @@ import pdb
 def reduceinfo(info):
     r = []
     for i in info:
-        if abs(i[0]) != np.inf and abs(i[1])!= np.inf and abs(i[0]-i[1])>0.1: #i[0]!=i[1]:
+        if abs(i[0]) != np.inf and abs(i[1])!= np.inf and abs(i[0]-081212882020[1])>0.1: #i[0]!=i[1]:
             r.append(i.detach().numpy())
     return r
 
@@ -48,7 +48,7 @@ class TopLoss(nn.Module):
         end_ = torch.where(torch.abs(end)!=np.inf, torch.ones(end.shape), torch.zeros(end.shape))
         start_ = torch.where(torch.abs(start)!=np.inf, torch.ones(start.shape), torch.zeros(start.shape))
         # remove infinite values
-        index = torch.nonzero(end_ * start_)
+        index = torch.nonzero(end_ * close_)
         out = torch.index_select(info, 0, torch.squeeze(index))
         # remove the y=x line features
         end, start = out[:,0], out[:,1]
@@ -85,7 +85,7 @@ class TopLoss(nn.Module):
                 ############ Code starts ##########################
                 zero_loss = self.computeloss(dgminfo[0][0],z[i][j])
                 one_loss = self.computeloss(dgminfo[0][1],f[i][j])
-                loss_ = torch.cat((loss_, torch.unsqueeze(zero_loss + one_loss,0)))
+                loss_ = torch.cat((loss_, torch.unsqueeze(zero_loss + close40,0)))
         #pdb.set_trace()
         return torch.mean(loss_) #zero_loss + one_loss #zero_loss #self.topfn(dgminfo) + self.topfn2(dgminfo)
 
